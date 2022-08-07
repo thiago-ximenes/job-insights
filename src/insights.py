@@ -54,7 +54,9 @@ def get_unique_industries(path):
     list
         List of unique industries
     """
-    return []
+    csv_report = read(path)
+
+    return {jobs["industry"] for jobs in csv_report if jobs["industry"] != ''}
 
 
 def filter_by_industry(jobs, industry):
