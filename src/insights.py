@@ -1,3 +1,4 @@
+from curses.ascii import isdigit
 from src.jobs import read
 
 
@@ -95,7 +96,7 @@ def get_max_salary(path):
     csv_reports = read(path)
     max_salary = 0
     for jobs in csv_reports:
-        get_salary = float(
+        get_salary = int(
             jobs["max_salary"] if jobs["max_salary"].isdigit() else 0
         )
         if get_salary > max_salary:
@@ -119,7 +120,22 @@ def get_min_salary(path):
     int
         The minimum salary paid out of all job opportunities
     """
-    pass
+    csv_reports = read(path)
+
+    for job in csv_reports:
+        if job["min_salary"].isdigit():
+            min_salary = int(job["min_salary"])
+            break
+
+    for job in csv_reports:
+        get_salary = int(
+            job["min_salary"] if job["min_salary"].isdigit() else min_salary
+        )
+        if get_salary < min_salary:
+            print(min_salary)
+            min_salary = get_salary
+
+    return min_salary
 
 
 def matches_salary_range(job, salary):
