@@ -134,7 +134,6 @@ def get_min_salary(path):
         if get_salary < min_salary:
             print(min_salary)
             min_salary = get_salary
-
     return min_salary
 
 
