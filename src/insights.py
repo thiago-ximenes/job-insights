@@ -1,5 +1,4 @@
 from src.jobs import read
-import math
 
 
 def get_unique_job_types(path):
