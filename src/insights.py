@@ -1,4 +1,5 @@
 from src.jobs import read
+import math
 
 
 def get_unique_job_types(path):
@@ -160,7 +161,16 @@ def matches_salary_range(job, salary):
         If `job["min_salary"]` is greather than `job["max_salary"]`
         If `salary` isn't a valid integer
     """
-    pass
+    try:
+        MIN_SALARY = int(job["min_salary"])
+        MAX_SALARY = int(job["max_salary"])
+
+        if MIN_SALARY > MAX_SALARY:
+            raise ValueError()
+
+        return MIN_SALARY <= salary <= MAX_SALARY
+    except (TypeError, KeyError):
+        raise ValueError()
 
 
 def filter_by_salary_range(jobs, salary):
