@@ -56,7 +56,7 @@ def get_unique_industries(path):
     """
     csv_report = read(path)
 
-    return {jobs["industry"] for jobs in csv_report if jobs["industry"] != ''}
+    return {jobs["industry"] for jobs in csv_report if jobs["industry"] != ""}
 
 
 def filter_by_industry(jobs, industry):
@@ -92,7 +92,16 @@ def get_max_salary(path):
     int
         The maximum salary paid out of all job opportunities
     """
-    pass
+    csv_reports = read(path)
+    max_salary = 0
+    for jobs in csv_reports:
+        get_salary = float(
+            jobs["max_salary"] if jobs["max_salary"].isdigit() else 0
+        )
+        if get_salary > max_salary:
+            max_salary = get_salary
+
+    return max_salary
 
 
 def get_min_salary(path):
